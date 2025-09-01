@@ -51,6 +51,7 @@
         "__tree": "cpp",
         "set": "cpp",
         "atomic": "cpp",
-        "map": "cpp"
+        "map": "cpp",
+        "fstream": "cpp"
     }
 }

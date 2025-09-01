@@ -1,24 +1,24 @@
-# (TODO: your game's title)
+# Serene Waters
 
 Author: Fara Yan (fayan)
 
-Design: (TODO: In two sentences or fewer, describe what is new and interesting about your game.)
+Design: Serene Waters is an underwater game where you guide Flair, a hungry goldfish, through the ocean. The game uses an asset pipeline to handle the palette data, tile information, and rendering sprites larger than 8×8 pixels under PPU64 constraints.
 
-Screen Shot:
+![Game](./game.png)
 
-![Screen Shot](screenshot.png)
+### How the Asset Pipeline works:
 
-How Your Asset Pipeline Works:
+Our asset pipeline follows these steps:
+1. I used GIMP to design the game assets and exported them as a png file: [goldfish.png](./goldfish.png). This includes the bubble tiles, and goldfish and seaweed sprites.
+2. I added a build step to `Maekfile.js` that can be run with `./dist/assets`. This runs the main function in [load_assets.cpp](./load_assets.cpp), which parses `goldfish.png` into 8x8 tiles and uses `load_chunk` to store a table of palettes, tiles, and sprites into `game.sprites`. This will create three palettes (for bubbles, goldfish, and tiles), and also calculate offsets for sprite tiles.
+3. During runtime, we read our processed assets via `Sprites::load` in [Sprites.cpp](./Sprites.cpp) on `game.sprites`. This reads our packed data using `read_chunk`, initializes the goldfish and seaweed game sprites, and loads in our tile and palette table to use during runtime.
 
-(TODO: describe the steps in your asset pipeline, from source files to tiles/backgrounds/whatever you upload to the PPU466.)
-* Run node Maekfile.js and ./dist/assets to load our assets into [game.sprites](./dist/game.sprites). This runs the main function in [load_assets.cpp](./load_assets.cpp), which reads from [goldfish.png](./goldfish.png), which includes our bubble tiles and the goldfish sprite. This uses load_chunk to store a table of palettes, tiles, and sprites.
-* We then read this in with read_chunk.
+### How To Play:
 
-(TODO: make sure the source files you drew are included. You can [link](your/file.png) to them to be a bit fancier.)
+Flair the goldfish is hungry! Luckily, the waters are abundant with floating seaweed. Your mission is to eat all 10 pieces of seaweed that are drifting through the waters.
 
-How To Play:
+Controls: Use the left/right/up/down arrows to move flair.
 
-(TODO: describe the controls and (if needed) goals/strategy.)
 
 This game was built with [NEST](NEST.md).
 
