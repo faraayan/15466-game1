@@ -29,6 +29,9 @@ struct PlayMode : Mode {
 	//player position:
 	glm::vec2 player_at = glm::vec2(0.0f);
 
+	// seaweed positions
+	std::vector<glm::vec2> seaweed_positions;
+
 	//----- drawing handled by PPU466 -----
 
 	PPU466 ppu;

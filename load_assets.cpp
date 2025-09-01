@@ -79,10 +79,7 @@ int main(int argc, char **argv) {
                     glm::u8vec4 color = data[(by * 8 + y) * size.x + bx * 8 + x];
                     auto it = std::find(std::begin(block_palette), std::end(block_palette), color);
                     int idx = 0;
-                    if (it == std::end(block_palette)) {
-                        std::cout << "Error: Color not found in palette! in tile (" << bx << ", "
-                                  << by << ")" << std::endl;
-                    } else {
+                    if (it != std::end(block_palette)) {
                         idx = std::distance(std::begin(block_palette), it);
                     }
                     set_tile_pixel(tile, x, 7 - y, idx);
