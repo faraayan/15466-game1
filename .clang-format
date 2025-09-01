@@ -1,0 +1,11 @@
+BasedOnStyle: Google
+IndentWidth: 4
+ColumnLimit: 100
+BraceWrapping:
+  AfterControlStatement: false
+  AfterFunction: false
+  AfterEnum: false
+  AfterStruct: false
+  AfterClass: false
+  BeforeElse: false
+  IndentBraces: false

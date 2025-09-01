@@ -16,6 +16,9 @@
 //Includes for libSDL:
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
+#include "read_write_chunk.hpp"
+#include "Sprites.hpp"
+#include <set>
 
 //...and for c++ standard library functions:
 #include <chrono>
@@ -23,10 +26,14 @@
 #include <stdexcept>
 #include <memory>
 #include <algorithm>
+#include <fstream>
+#include <vector>
+#include "data_path.hpp"
 
 #ifdef _WIN32
 extern "C" { uint32_t GetACP(); }
 #endif
+
 int main(int argc, char **argv) {
 #ifdef _WIN32
 	{ //when compiled on windows, check that code page is forced to utf-8 (makes file loading/saving work right):
@@ -64,7 +71,7 @@ int main(int argc, char **argv) {
 
 	//create window:
 	Mode::window = SDL_CreateWindow(
-		"gp25 game1: remember to change your title", //TODO: remember to set a title for your game!
+		"gp25 game1: serene waters", //TODO: remember to set a title for your game!
 		2*PPU466::ScreenWidth + 8, 2*PPU466::ScreenHeight + 8, //TODO: modify window size if you'd like
 		SDL_WINDOW_OPENGL
 		| SDL_WINDOW_RESIZABLE //uncomment to allow resizing

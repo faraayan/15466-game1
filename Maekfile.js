@@ -113,24 +113,37 @@ if (maek.OS === 'windows') {
 //returns objFile: objFileBase + a platform-dependant suffix ('.o' or '.obj')
 const game_objs = [
 	maek.CPP('PlayMode.cpp'),
-	maek.CPP('PPU466.cpp'),
+	maek.CPP('PPU466.cpp', 'objs/game_PPU466'),
 	maek.CPP('main.cpp'),
 	maek.CPP('load_save_png.cpp'),
 	maek.CPP('Load.cpp'),
 	maek.CPP('data_path.cpp'),
 	maek.CPP('Mode.cpp'),
 	maek.CPP('gl_compile_program.cpp'),
-	maek.CPP('GL.cpp')
+	maek.CPP('GL.cpp'),
+	maek.CPP('Sprites.cpp'),
 ];
+
+const game_exe = maek.LINK(game_objs, 'dist/game');
 
 //the '[exeFile =] LINK(objFiles, exeFileBase, [, options])' links an array of objects into an executable:
 // objFiles: array of objects to link
 // exeFileBase: name of executable file to produce
 //returns exeFile: exeFileBase + a platform-dependant suffix (e.g., '.exe' on windows)
-const game_exe = maek.LINK(game_objs, 'dist/game');
+const load_assets_objs = [
+    maek.CPP('PPU466.cpp', 'objs/assets_PPU466'),
+    maek.CPP('Sprites.cpp', 'objs/assets_Sprites'),
+    maek.CPP('load_save_png.cpp', 'objs/assets_load_save_png'),
+    maek.CPP('load_assets.cpp', 'objs/assets_load_assets'),
+    maek.CPP('Load.cpp', 'objs/assets_Load'),
+    maek.CPP('gl_compile_program.cpp', 'objs/assets_gl_compile_program')
+];
+
+// Create asset executable
+const load_assets_exe = maek.LINK(load_assets_objs, 'dist/assets');
 
 //set the default target to the game (and copy the readme files):
-maek.TARGETS = [game_exe, ...copies];
+maek.TARGETS = [load_assets_exe, game_exe, ...copies];
 
 //======================================================================
 //Now, onward to the code that makes all this work:
